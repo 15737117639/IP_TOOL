@@ -23,10 +23,11 @@ def get_page(url, options={}, proxy=None):
 
     try:
         redis = RedisClient()
-        proxies = {
-            "http": "http://{}".format(redis.random()),
-        }
-        response = requests.get(url, headers=headers, proxies=proxies)
+        # proxies = {
+        #     "http": "http://{}".format(redis.random()),
+        # }
+        # response = requests.get(url, headers=headers, proxies=proxies)
+        response = requests.get(url, headers=headers)
         print('抓取成功', url, response.status_code)
         if response.status_code == 200:
             return response.text

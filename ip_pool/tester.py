@@ -7,7 +7,7 @@ import sys
 
 
 VALID_STATUS_CODES = [200]
-TEST_ＵＲＬ = 'http://glidedsky.com'
+test_url = 'http://httpbin.org/ip'
 BATCH_TEST_SIZE = 100
 
 
@@ -29,7 +29,7 @@ class Tester(object):
                     proxy = proxy.decode('utf-8')
                 real_proxy = "http://" + proxy
                 print("正在尝试:", real_proxy)
-                async with session.get(TEST_ＵＲＬ, proxy=real_proxy, timeout=15) as response:
+                async with session.get(test_url, proxy=real_proxy, timeout=15) as response:
                     if response.status in VALID_STATUS_CODES:
                         self.redis.max(proxy)
                         print("代理可用", proxy)

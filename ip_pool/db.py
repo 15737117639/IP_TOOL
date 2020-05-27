@@ -2,8 +2,8 @@ import redis
 from random import choice
 
 MAX_SCORE = 100
-MIN_SCORE = 0
-INITIAL_SCORE = 10
+MIN_SCORE = 80
+INITIAL_SCORE = 100
 REDIS_HOST = "localhost"
 REDIS_PORT = 6379
 DB_NUM = 4
@@ -60,8 +60,8 @@ class RedisClient(object):
         """
         score = self.db.zscore(REDIS_KEY, proxy)
         if score and score > MIN_SCORE:
-            print('代理', proxy, '当前分数', score, '减1')
-            return self.db.zincrby(REDIS_KEY, -1, proxy)
+            print('代理', proxy, '当前分数', score, '减2')
+            return self.db.zincrby(REDIS_KEY, -2, proxy)
         else:
             print("代理", proxy, "当前分数", score, "移除")
             return self.db.zrem(REDIS_KEY, proxy)
@@ -113,6 +113,6 @@ if __name__ == '__main__':
     # a.decrease("18218299:415")
     # print(a.random())
     # print(a.exits("18218299:413"))
-    a.max("18218299:415")
+    # a.max("18218299:415")
     print(a.count())
     print(a.all())
